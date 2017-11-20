@@ -33,10 +33,8 @@ int prefix(char *string, char *pre){
 	return 1;
 }
 int suffix(char *string, char *suf){
-	for(; *string!='\0'; string++);
-	for(; *suf!='\0'; suf++);
-	for(string--, suf--; *suf!='\0'; suf--, string--)
-		if(*suf != *string) return 0;
+	for(int i=(strlen(string)-1), j=(strlen(suf)-1); j>=0; i--, j--)
+		if(string[i] != suf[j]) return 0;
 	return 1;
 }
 
@@ -183,64 +181,73 @@ int INC(AWKCommand awk){
 	int i=1;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
-		fprintf(awk.dest, "%d  %s", i, buffer);
+		fprintf(awk.dest, "%d\t%s", i, buffer);
 		i++;
 	}
 	return 1;
 }
 int CC(AWKCommand awk, char *string){	
 	char buffer[BUFSIZ];
-	int i = 0;
+	int linea = 0;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
+		int i = 0;
+		linea++;
 		char *token;
 		token = strtok(buffer, " ");
 		while(token != NULL){
 			if(strcmp(token,string) == 0) i++;
 			token = strtok(NULL, " ");
 		}
+		printf("Ocurrencias en la linea %3d: %d.\n", linea, i);
 	}
-	printf("Hubo un total de %d ocurrencias de la cadena '%s'", i, string);
+	return 0;
 }
 int CCsubstring(AWKCommand awk, char *string){
 	char buffer[BUFSIZ];
-	int coincidences = 0;
+	int linea = 0;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
-		coincidences += substring(buffer, string);
+		linea++;
+		int coincidences;
+		coincidences = substring(buffer, string);
+		printf("Ocurrencias en la linea %3d: %d.\n", linea, coincidences);
 	}
-	printf("Hubo un total de %d ocurrencias de la subcadena '%s'", coincidences, string);
-	return coincidences;
+	return 0;
 }
 int CP(AWKCommand awk, char *pre){
 	char buffer[BUFSIZ];
-	int i = 0;
+	int linea = 0;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
 		char *token;
+		int i = 0;
+		linea++;
 		token = strtok(buffer, " ");
 		while(token != NULL){
+			if(indexOf(token, '\t') != -1)token[indexOf(token, '\n')] = '\0';
 			i += prefix(token, pre);
 			token = strtok(NULL, " ");
 		}
+		printf("Ocurrencias en la linea %3d: %d.\n", linea, i);
 	}
-	printf("Hubo un total de %d ocurrencias del prefijo '%s'", i, pre);
-	return i;
+	return 0;
 }
 int CS(AWKCommand awk, char *suf){
 	char buffer[BUFSIZ];
-	int i = 0;
+	int linea = 0;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
 		char *token;
+		int i = 0;
+		linea++;
 		token = strtok(buffer, " ");
 		while(token != NULL){
 			if(indexOf(token, '\n') != -1)token[indexOf(token, '\n')] = '\0';
 			i += suffix(token, suf);
 			token = strtok(NULL, " ");
 		}
+		printf("Ocurrencias en la linea %3d: %d.\n", linea, i);
 	}
-	printf("Hubo un total de %d ocurrencias del prefijo '%s'", i, suf);
-	return i;
+	return 0;
 }
-

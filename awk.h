@@ -3,6 +3,8 @@
 
 #include "cli.h"
 
+int substring(char *string, char *substr);
+
 int S(AWKCommand awk, char *search, char *replace);
 int Schar(AWKCommand awk, char search, char replace);
 int Sstring(AWKCommand awk, const char *search, const char *replace);
