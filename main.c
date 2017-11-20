@@ -13,29 +13,44 @@ int main(int argc, char *argv[]) {
 	
 	if(substring(argv[2], "SmM")){
 		awk.command = "SmM";
-		openDest(&awk, argv[argc-1]);
+		if(argc<4)
+			openDest(&awk, NULL);
+		else
+			openDest(&awk, argv[argc-1]);
 		SmM(awk);
 	}
 	else if(substring(argv[2], "SMm")){
 		awk.command = "SMm";
-		openDest(&awk, argv[argc-1]);
+		if(argc<4)
+			openDest(&awk, NULL);
+		else
+			openDest(&awk, argv[argc-1]);
 		SMm(awk);
 	}
 	else if(substring(argv[2], "IL")){
 		awk.command = "IL";
-		openDest(&awk, argv[argc-1]);
+		if(argc<4)
+			openDest(&awk, NULL);
+		else
+			openDest(&awk, argv[argc-1]);
 		getDigits(&awk, argv[2]);
 		IL(awk);
 	}
 	else if(substring(argv[2], "IC")){
 		awk.command = "IC";
-		openDest(&awk, argv[argc-1]);
+		if(argc<4)
+			openDest(&awk, NULL);
+		else
+			openDest(&awk, argv[argc-1]);
 		getDigits(&awk, argv[2]);
 		IC(awk);
 	}
 	else if(substring(argv[2], "INC")){
 		awk.command = "INC";
-		openDest(&awk, argv[argc-1]);
+		if(argc<4)
+			openDest(&awk, NULL);
+		else
+			openDest(&awk, argv[argc-1]);
 		INC(awk);
 	}
 	else if(substring(argv[2], "CC")){
@@ -64,13 +79,19 @@ int main(int argc, char *argv[]) {
 	}
 	else if(substring(argv[2], "L")){
 		awk.command = "L";
-		openDest(&awk, argv[argc-1]);
+		if(argc<4)
+			openDest(&awk, NULL);
+		else
+			openDest(&awk, argv[argc-1]);
 		getDigits(&awk, argv[2]);
 		L(awk);
 	}
 	else if(substring(argv[2], "C")){
 		awk.command = "C";
-		openDest(&awk, argv[argc-1]);
+		if(argc<4)
+			openDest(&awk, NULL);
+		else
+			openDest(&awk, argv[argc-1]);
 		getDigits(&awk, argv[2]);
 		C(awk);
 	}
@@ -80,7 +101,10 @@ int main(int argc, char *argv[]) {
 			printf("\"%s\" esperaba mas argumentos.\nPara mas ayuda ejecuta '%s --help'\n", argv[2], argv[0]);
 			return 1;
 		}
-		openDest(&awk, argv[argc-1]);
+		if(argc<4)
+			openDest(&awk, NULL);
+		else
+			openDest(&awk, argv[argc-1]);
 		S(awk, argv[3], argv[4]);
 	}
 	else{

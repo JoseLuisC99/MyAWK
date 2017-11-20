@@ -55,45 +55,24 @@ int Schar(AWKCommand awk, char search, char replace){
 	}
 	return 1;
 }
-int Sstring(AWKCommand awk, const char *search, const char *replace){
+int Sstring(AWKCommand awk, char *search, char *replace){
 	char buffer[BUFSIZ];
-	int siz_search = strlen(search), siz_replace = strlen(replace);
 	
 	while(!feof(awk.source)){
-		
 		fgets(buffer, BUFSIZ, awk.source);
-		int sizcad = strlen(buffer), ocurrence_index, is_subcad = 0;
-		char *result;
-		result = (char *)malloc(0 * sizeof(char));
-		
-		for(int i=0; i<sizcad; i++){
-			/*if(buffer[i] == search[0]){
-				ocurrence_index = i;
-				for(int j = 0, k = i; j < siz_search; j++, k++){
-					if(buffer[k] == search[j]){
-						//printf("%c", buffer[k]);
-						is_subcad = 1;
-					}
-					else{
-						is_subcad = 0;
-						break;
-					}
-				}
-				if(is_subcad){
-					
-				}
-				//printf("%d\n", is_subcad);
-			}*/
-			result = (char *)realloc(result, (i+1) * sizeof(char));
-			result[i] = buffer[i];
-			//printf("%d:%d:%c ", i, result[i], result[i]);
+		int size = 0;
+		char *token;
+		token = strtok(buffer, " ");
+		while(token != NULL){
+			if(indexOf(token, '\n') != -1)token[indexOf(token, '\n')] = '\0';
+			if(strcmp(search, token) == 0){
+				fprintf(awk.dest, "%s ", replace);
+			}else{
+				fprintf(awk.dest, "%s ", token);
+			}
+			token = strtok(NULL, " ");
 		}
-		//result = (char *)realloc(result, (strlen(result)) * sizeof(char));
-		//result[strlen(result)-1] = '\0';
-		//printf("%s", result);
-		//fputs(result, dest);
-		printf("%d:%s\n", strlen(result), result);
-		free(result);
+		fprintf(awk.dest, "\n");
 	}
 }
 
@@ -225,7 +204,7 @@ int CP(AWKCommand awk, char *pre){
 		linea++;
 		token = strtok(buffer, " ");
 		while(token != NULL){
-			if(indexOf(token, '\t') != -1)token[indexOf(token, '\n')] = '\0';
+			if(indexOf(token, '\t') != -1)token[indexOf(token, '\t')] = '\0';
 			i += prefix(token, pre);
 			token = strtok(NULL, " ");
 		}

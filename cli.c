@@ -34,7 +34,10 @@ int openSource(AWKCommand *awk, char *filename){
 }
 int openDest(AWKCommand *awk, char *filename){
 	FILE *dest;
-	dest = fopen(filename, "w");
+	if(filename == NULL)
+		dest = stdout;
+	else
+		dest = fopen(filename, "w");
 	if(dest == NULL){
 		printf("Error: No se pudo abrir el archivo %s.\n", filename);
 		exit(1);
