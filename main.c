@@ -9,6 +9,10 @@
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char *argv[]) {
+	if(argc<=1){
+		puts("Error: comando no especificado.");
+		return 1;
+	}
 	if(strcmp(argv[1], "--help") == 0){
 		help(argv[0]);
 		return 0;

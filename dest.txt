@@ -13,5 +13,5 @@
 13	Subtitulo cuyo fin informar en forma muy resumida
 14	Nombre de  la agencia que proporciono la informacion o el responsable de la publicacion.
 15	Cuerpo de la informacion y desarrollo de la misma
-16	Fotografias que van con el texto para aclarar la informacion
-17	Pie de Grabado son los datos referentes a la fotografia
+16	Fotografias que van con el texto para aclarar la publicacion, informacion
+17	Pie de Grabado son los datos referentes a la fotografia(publicacion;publicacion)
