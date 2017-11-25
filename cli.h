@@ -18,6 +18,7 @@ AWKCommand createCommand(int argc, char *argv[]);
 int *getDigits(AWKCommand *awk, char digits[]);
 int destroyCommand(AWKCommand *awk);
 int openSource(AWKCommand *awk, char *filename);
-int openDest(AWKCommand *awk, char *filename);
+int openDest(AWKCommand *awk, char *argv[], int argc, int minsize);
+int getFlags(AWKCommand *awk, char *argv[], int argc, int init);
 
 #endif

@@ -5,6 +5,8 @@
 #include "cli.h"
 
 
+const char tokens_text[] = " 	,.;:-_()[]{}<>'¡!¿?/\"\\";
+
 int indexOf(char *string, char c){
 	char *ptr;
 	for(int i=0; i<strlen(string); i++)
@@ -128,7 +130,7 @@ int IL(AWKCommand awk){
 	int i = 0;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
-		if(containDigit(awk, i)) fprintf(awk.dest, "%s\n", buffer);
+		if(containDigit(awk, i)) fprintf(awk.dest, "\n%s", buffer);
 		else fputs(buffer, awk.dest);
 		i++;
 	}
@@ -144,7 +146,7 @@ int IC(AWKCommand awk){
 		while(token != NULL){
 			if(indexOf(token, '\n') != -1)token[indexOf(token, '\n')] = '\0';
 			if(containDigit(awk, i)){
-				fprintf(awk.dest, "%s\t", token);
+				fprintf(awk.dest, "\t%s ", token);
 			}else{
 				fprintf(awk.dest, "%s ", token);
 			}
@@ -173,10 +175,11 @@ int CC(AWKCommand awk, char *string){
 		int i = 0;
 		linea++;
 		char *token;
-		token = strtok(buffer, " ");
+		token = strtok(buffer, tokens_text);
 		while(token != NULL){
+			if(indexOf(token, '\n') != -1)token[indexOf(token, '\n')] = '\0';
 			if(strcmp(token,string) == 0) i++;
-			token = strtok(NULL, " ");
+			token = strtok(NULL, tokens_text);
 		}
 		printf("Ocurrencias en la linea %3d: %d.\n", linea, i);
 	}
@@ -202,11 +205,10 @@ int CP(AWKCommand awk, char *pre){
 		char *token;
 		int i = 0;
 		linea++;
-		token = strtok(buffer, " ");
+		token = strtok(buffer, tokens_text);
 		while(token != NULL){
-			if(indexOf(token, '\t') != -1)token[indexOf(token, '\t')] = '\0';
 			i += prefix(token, pre);
-			token = strtok(NULL, " ");
+			token = strtok(NULL, tokens_text);
 		}
 		printf("Ocurrencias en la linea %3d: %d.\n", linea, i);
 	}
@@ -220,11 +222,11 @@ int CS(AWKCommand awk, char *suf){
 		char *token;
 		int i = 0;
 		linea++;
-		token = strtok(buffer, " ");
+		token = strtok(buffer, tokens_text);
 		while(token != NULL){
 			if(indexOf(token, '\n') != -1)token[indexOf(token, '\n')] = '\0';
 			i += suffix(token, suf);
-			token = strtok(NULL, " ");
+			token = strtok(NULL, tokens_text);
 		}
 		printf("Ocurrencias en la linea %3d: %d.\n", linea, i);
 	}

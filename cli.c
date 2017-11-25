@@ -3,16 +3,19 @@
 #include <stdio.h>
 #include "cli.h"
 
+const char *token_cli = "CILSMmPn";
+
 int *getDigits(AWKCommand *awk, char digits[]){
 	char *token;
 	awk->n_size = 0;
 	awk->n = (int *)malloc(0 * sizeof(int));
-	token = strtok(digits, "CILSMmPn");
+	token = strtok(digits, token_cli);
 	while(token != NULL){
 		awk->n_size++;
 		awk->n = (int *)realloc(awk->n, awk->n_size * sizeof(int));
 		if(atoi(token) > 0) awk->n[awk->n_size - 1] = atoi(token) - 1;
-		token = strtok(NULL, "CILSMmPn");
+		//printf("%d ", awk->n[awk->n_size - 1]);
+		token = strtok(NULL, token_cli);
 	}
 	return awk->n;
 }
@@ -32,14 +35,14 @@ int openSource(AWKCommand *awk, char *filename){
 	awk->source = source;
 	return 0;
 }
-int openDest(AWKCommand *awk, char *filename){
+int openDest(AWKCommand *awk, char *argv[], int argc, int minsize){
 	FILE *dest;
-	if(filename == NULL)
+	if(argc<minsize)
 		dest = stdout;
 	else
-		dest = fopen(filename, "w");
+		dest = fopen(argv[argc-1], "w");
 	if(dest == NULL){
-		printf("Error: No se pudo abrir el archivo %s.\n", filename);
+		printf("Error: No se pudo abrir el archivo de destino.\n");
 		exit(1);
 	}
 	awk->dest = dest;
