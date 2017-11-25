@@ -14,7 +14,6 @@ int *getDigits(AWKCommand *awk, char digits[]){
 		awk->n_size++;
 		awk->n = (int *)realloc(awk->n, awk->n_size * sizeof(int));
 		if(atoi(token) > 0) awk->n[awk->n_size - 1] = atoi(token) - 1;
-		//printf("%d ", awk->n[awk->n_size - 1]);
 		token = strtok(NULL, token_cli);
 	}
 	return awk->n;

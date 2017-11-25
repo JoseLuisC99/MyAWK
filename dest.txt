@@ -1,17 +1,17 @@
-Se entiende e como texto periodistico a aquel que se redacta para ser publicado 
-	publicacion en medios masivos .l. comunicacion en especial .l. tipo impreso Pueden ser 
-noticias sensacionalistas serias o simplemente comentarios pero su objetivo 
-es informar sobre temas .l. interes general o .l. interes para un segmento en 
-particular .l. personas 
-El fin que se busca es enterar .l. la informacion actual veridica oportuna y 
-con interes social a los lectores a quienes se dirige En estos textos pueden 
-ser introducidas algunas opiniones o comentarios pero suelen ser  
-esporadicos 
-Los principales elementos que constituyen el texto periodistico son 
-Encabezado o titulo principal 
-Adelanto .l. informacion que tiene la intencion .l. enganchar a la lectura 
-Subtitulo cuyo fin informar en forma muy resumida 
-Nombre .l. la agencia que proporciono la informacion o el responsable .l. la publicacion. 
-Cuerpo .l. la informacion y desarrollo .l. la misma 
-Fotografias que van con el texto para aclarar la informacion 
-Pie .l. Grabado son los datos referentes a la fotografia 
+1	Se entiende e como texto periodistico a aquel que se redacta para ser publicado
+2		publicacion en medios masivos de comunicacion en especial de tipo impreso Pueden ser
+3	noticias sensacionalistas serias o simplemente comentarios pero su objetivo
+4	es informar sobre temas de interes general o de interes para un segmento en
+5	particular de personas
+6	El fin que se busca es enterar de la  informacion actual veridica oportuna y
+7	con interes social a los lectores a quienes se dirige En estos textos pueden
+8	ser introducidas algunas opiniones o comentarios pero suelen ser 
+9	esporadicos
+10	Los principales elementos que constituyen el texto periodistico son
+11	Encabezado o titulo principal
+12	Adelanto de informacion que tiene la intencion de enganchar a la lectura
+13	Subtitulo cuyo fin informar en forma muy resumida
+14	Nombre de  la agencia que proporciono la informacion o el responsable de la publicacion.
+15	Cuerpo de la informacion y desarrollo de la misma
+16	Fotografias que van con el texto para aclarar la informacion
+17	Pie de Grabado son los datos referentes a la fotografia

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 
 #include "awk.h"
 #include "cli.h"
@@ -8,15 +9,19 @@
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char *argv[]) {
+	if(strcmp(argv[1], "--help") == 0){
+		help(argv[0]);
+		return 0;
+	}
 	AWKCommand awk;
 	openSource(&awk, argv[1]);
 	
-	if(substring(argv[2], "SmM")){
+	if(strcmp(argv[2], "SmM") == 0){
 		awk.command = "SmM";
 		openDest(&awk, argv, argc, 4);
 		SmM(awk);
 	}
-	else if(substring(argv[2], "SMm")){
+	else if(strcmp(argv[2], "SMm") == 0){
 		awk.command = "SMm";
 		openDest(&awk, argv, argc, 4);
 		SMm(awk);
@@ -33,12 +38,12 @@ int main(int argc, char *argv[]) {
 		getDigits(&awk, argv[2]);
 		IC(awk);
 	}
-	else if(substring(argv[2], "INC")){
+	else if(strcmp(argv[2], "INC") == 0){
 		awk.command = "INC";
 		openDest(&awk, argv, argc, 4);
 		INC(awk);
 	}
-	else if(substring(argv[2], "CC")){
+	else if(strcmp(argv[2], "CC") == 0){
 		awk.command = "CC";
 		if(argc<4){
 			printf("\"%s\" esperaba mas argumentos.\nPara mas ayuda ejecuta '%s --help'\n", argv[2], argv[0]);
@@ -46,7 +51,7 @@ int main(int argc, char *argv[]) {
 		}
 		CC(awk, argv[3]);
 	}
-	else if(substring(argv[2], "CP")){
+	else if(strcmp(argv[2], "CP") == 0){
 		awk.command = "CP";
 		if(argc<4){
 			printf("\"%s\" esperaba mas argumentos.\nPara mas ayuda ejecuta '%s --help'\n", argv[2], argv[0]);
@@ -54,7 +59,7 @@ int main(int argc, char *argv[]) {
 		}
 		CP(awk, argv[3]);
 	}
-	else if(substring(argv[2], "CS")){
+	else if(strcmp(argv[2], "CS") == 0){
 		awk.command = "CS";
 		if(argc<4){
 			printf("\"%s\" esperaba mas argumentos.\nPara mas ayuda ejecuta '%s --help'\n", argv[2], argv[0]);
@@ -74,7 +79,7 @@ int main(int argc, char *argv[]) {
 		getDigits(&awk, argv[2]);
 		C(awk);
 	}
-	else if(substring(argv[2], "S")){
+	else if(strcmp(argv[2], "S") == 0){
 		awk.command = "S";
 		if(argc<5){
 			printf("\"%s\" esperaba mas argumentos.\nPara mas ayuda ejecuta '%s --help'\n", argv[2], argv[0]);

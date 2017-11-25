@@ -169,7 +169,7 @@ int INC(AWKCommand awk){
 }
 int CC(AWKCommand awk, char *string){	
 	char buffer[BUFSIZ];
-	int linea = 0;
+	int linea = 0, total = 0;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
 		int i = 0;
@@ -178,28 +178,34 @@ int CC(AWKCommand awk, char *string){
 		token = strtok(buffer, tokens_text);
 		while(token != NULL){
 			if(indexOf(token, '\n') != -1)token[indexOf(token, '\n')] = '\0';
-			if(strcmp(token,string) == 0) i++;
+			if(strcmp(token,string) == 0){
+				i++;
+				total++;
+			}
 			token = strtok(NULL, tokens_text);
 		}
 		printf("Ocurrencias en la linea %3d: %d.\n", linea, i);
 	}
+	printf("\nEl numero total de ocurrencias es %d.", total);
 	return 0;
 }
 int CCsubstring(AWKCommand awk, char *string){
 	char buffer[BUFSIZ];
-	int linea = 0;
+	int linea = 0, total = 0;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
 		linea++;
 		int coincidences;
 		coincidences = substring(buffer, string);
+		total += coincidences;
 		printf("Ocurrencias en la linea %3d: %d.\n", linea, coincidences);
 	}
+	printf("\nEl numero total de ocurrencias es %d.", total);
 	return 0;
 }
 int CP(AWKCommand awk, char *pre){
 	char buffer[BUFSIZ];
-	int linea = 0;
+	int linea = 0, total = 0;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
 		char *token;
@@ -210,13 +216,15 @@ int CP(AWKCommand awk, char *pre){
 			i += prefix(token, pre);
 			token = strtok(NULL, tokens_text);
 		}
+		total += i;
 		printf("Ocurrencias en la linea %3d: %d.\n", linea, i);
 	}
+	printf("\nEl numero total de ocurrencias es %d.", total);
 	return 0;
 }
 int CS(AWKCommand awk, char *suf){
 	char buffer[BUFSIZ];
-	int linea = 0;
+	int linea = 0, total = 0;
 	while(!feof(awk.source)){
 		fgets(buffer, BUFSIZ, awk.source);
 		char *token;
@@ -228,7 +236,29 @@ int CS(AWKCommand awk, char *suf){
 			i += suffix(token, suf);
 			token = strtok(NULL, tokens_text);
 		}
+		total += i;
 		printf("Ocurrencias en la linea %3d: %d.\n", linea, i);
 	}
+	printf("\nEl numero total de ocurrencias es %d.", total);
 	return 0;
+}
+int help(char *program){
+	puts("MyAWK [Version 1.0.0]");
+	puts("2017 Jose Luis Castro Garcia.");
+	printf("\nSintaxis: %s <archivo-fuente> <comando> <parametros> [archivo-destino]\n\n", program);
+	
+	puts("El comando puede ser algunos de los siguientes:");
+	puts("    S str1 str2		Remplaza la cadena str1 por la cadena str2 a lo largo de todo el archivo.");
+	puts("    SmM			Remplaza todas las letras minusculas por mayusculas.");
+	puts("    SMm			Remplaza todas las letras mayusculas por minusculas.");
+	puts("    Lnd1nd2nd3n...	(n es el separador de digitos) Imprime las lineas indicadas por d1, d2 d3, ...");
+	puts("    Cnd1nd2nd3n...	(n es el separador de digitos) Imprime las columnas indicadas por d1, d2 d3, ...");
+	puts("    ILnd1nd2nd3n...	(n es el separador de digitos) Mete un salto de linea en las lineas ");
+	puts("			indicadas por d1, d2 d3, ...");
+	puts("    ICnd1nd2nd3n...	(n es el separador de digitos) Mete un tabulador las en columnas ");
+	puts("			indicadas por d1, d2 d3, ...");
+	puts("    INC			Imprime una columna indicando el numero de linea de cada renglon.");
+	puts("    CC str		Cuenta e imprime el numero de currencias de la cadena str por linea.");
+	puts("    CP str		Cuenta e imprime el numero de currencias del prefijo str por linea.");
+	puts("    CS str		Cuenta e imprime el numero de currencias del sufijo str por linea.");
 }

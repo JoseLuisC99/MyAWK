@@ -19,5 +19,6 @@ int CC(AWKCommand awk, char *string);
 int CCsubstring(AWKCommand awk, char *substring);
 int CP(AWKCommand awk, char *prefix);
 int CS(AWKCommand awk, char *suf);
+int help(char *program);
 
 #endif
